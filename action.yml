@@ -1,0 +1,63 @@
+name: "conftest kubernetes action"
+description: "Write structured tests and validate your configuration files using Open Policy Agent"
+author: "joaoss35"
+inputs:
+  combine:
+    description: "Combine all config files to be evaluated together"
+    default: false
+    required: false
+  gh-token:
+    description: "The token to make pull requests comments possible"
+    default: ""
+    required: false
+  namespace:
+    description: "The namespace where the policies will be tested"
+    default: "main"
+    required: false
+  output:
+    description: "The output format for Conftest results"
+    default: "stdout"
+    required: false
+  parser:
+    description: "The parser that will be used to parse the configurations"
+    default: "yaml"
+    required: false
+  path:
+    description: "The path for the files that will be tested"
+    default: "."
+    required: true
+  policy:
+    description: "The path where the Rego policy can be found"
+    default: "policy"
+    required: false
+  pr-comment:
+    description: "A pull-request comment with the test output"
+    default: ""
+    required: false
+  trace:
+    description: "Enable more verbose trace output for Rego queries"
+    default: false
+    required: false
+  update:
+    description: "A list of policies that will be downloaded before the tests run"
+    default: ""
+    required: false
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.combine}}
+    - ${{ inputs.gh-token}}
+    - ${{ inputs.namespace}}
+    - ${{ inputs.output}}
+    - ${{ inputs.parser}}
+    - ${{ inputs.path}}
+    - ${{ inputs.policy}}
+    - ${{ inputs.pr-comment}}
+    - ${{ inputs.trace}}
+    - ${{ inputs.update}}
+
+branding:
+  color: orange
+  icon: lock
