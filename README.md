@@ -40,7 +40,7 @@ jobs:
       - name: conftest
         uses: joaoss35/conftest-kubernetes-action@1.0
         with:
-          path: deployment.yaml
+          path: example/deployment.yml
 ```
 ### Remote
 
@@ -57,7 +57,7 @@ jobs:
       - name: conftest
         uses: joaoss35/conftest-kubernetes-action@1.0
         with:
-          path: deployment.yaml
+          path: example/deployment.yml
           update: github.com/instrumenta/policies.git//kubernetes
 ```
 
@@ -77,7 +77,7 @@ jobs:
       - name: conftest
         uses: joaoss35/conftest-kubernetes-action@1.0
         with:
-          path: deployment.yaml
+          path: example/deployment.yml
           policy: your_custom_policies_path_here
 ```
 
@@ -97,7 +97,7 @@ jobs:
       - name: conftest
         uses: joaoss35/conftest-kubernetes-action@1.0
         with:
-          path: deployment.yaml
+          path: example/deployment.yml
           policy: your_custom_policies_path_here
           update: your_policies_url_here
           namespace: your_policies_namespace_here
@@ -129,11 +129,18 @@ jobs:
 ```
 
 ## Building locally
-
 ```shell
 git clone git@github.com:joaoss35/conftest-kubernetes-action.git
 cd conftest-kubernetes-action
 docker build -t foo_bar:foo_biz .
+```
+
+## Running locally
+
+```shell
+git clone git@github.com:joaoss35/conftest-kubernetes-action.git
+cd conftest-kubernetes-action
+docker run -v "$PWD:/action" -e COMBINE=true -e NAMESPACE=main -e PARSER=yaml -e FILE=/action/example/deployment.yml -e TRACE=false -e OUTPUT=stdout -e UPDATE=github.com/instrumenta/policies.git//kubernetes -e POLICY=policy joaoss35/conftest-kubernetes-action:1.1
 ```
 
 ## Actions CI
