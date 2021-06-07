@@ -13,13 +13,13 @@ A Github action that uses [Conftest](https://www.conftest.dev/) as tool to run t
 | Option | Description | Default | Required |
 | :-: | --- | :-: | :-: |
 | combine |  Combines files into one input data structure | `false` | No |
-| gh-token | The [github private access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to perform pull requests authenthication | n/a | No |
+| token | The [github private access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to perform pull requests authenthication | n/a | No |
 | namespace | The namespace which to search for rules | `main` | No |
 | output | The output format used by Conftest for displaying the results | `stdout` | No |
 | parser | Force a specific file parser type | `yaml` | No |
-| path | The path for the files that Conftest will test | `.` | **Yes** |
+| file | The path for the files that Conftest will test | `.` | **Yes** |
 | policy | The path where Conftest will look for the rego policies | `policy` | No |
-| pr-comment | Perform a pull-request comment with the tests output | n/a | No |
+| comment | Perform a pull-request comment with the tests output | n/a | No |
 | trace | Make conftest output more verbose during tests | `false` | No |
 | update | A list of remote policies that will be downloaded before the tests run | n/a | No |
 
@@ -40,7 +40,7 @@ jobs:
       - name: conftest
         uses: joaoss35/conftest-kubernetes-action@1.0
         with:
-          path: example/deployment.yml
+          file: example/deployment.yml
 ```
 ### Remote
 
@@ -57,7 +57,7 @@ jobs:
       - name: conftest
         uses: joaoss35/conftest-kubernetes-action@1.0
         with:
-          path: example/deployment.yml
+          file: example/deployment.yml
           update: github.com/instrumenta/policies.git//kubernetes
 ```
 
@@ -77,7 +77,7 @@ jobs:
       - name: conftest
         uses: joaoss35/conftest-kubernetes-action@1.0
         with:
-          path: example/deployment.yml
+          file: example/deployment.yml
           policy: your_custom_policies_path_here
 ```
 
@@ -97,7 +97,7 @@ jobs:
       - name: conftest
         uses: joaoss35/conftest-kubernetes-action@1.0
         with:
-          path: example/deployment.yml
+          file: example/deployment.yml
           policy: your_custom_policies_path_here
           update: your_policies_url_here
           namespace: your_policies_namespace_here
@@ -120,7 +120,7 @@ jobs:
         uses: joaoss35/conftest-kubernetes-action@1.0
         with:
           combine: true
-          path: main.tf
+          file: main.tf
           namespace: your_policies_namespace_here
           policy: your_custom_policies_path_here
           update: your_policies_url_here

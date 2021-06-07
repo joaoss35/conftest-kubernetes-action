@@ -50,7 +50,8 @@ SUCCESS=$?
 
 # Check if Conftest run successfully
 if [ ${SUCCESS} -eq 0 ]; then
-  echo "Conftest has successfully validated files"
+  echo "Conftest has successfully validated your files"
+  echo "${CONFTEST_OUTPUT}"
   exit 0
 else
   # If not throw an error

@@ -1,0 +1,16 @@
+name: conftest
+on: push
+jobs:
+  conftest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: conftest
+        uses: joaoss35/conftest-kubernetes-action@1.1
+        with:
+          file: example/deployment.yml
+          policy: policy
+          update: github.com/instrumenta/policies.git//kubernetes
+          namespace: main
