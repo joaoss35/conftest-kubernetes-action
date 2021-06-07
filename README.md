@@ -40,7 +40,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: conftest
-        uses: joaoss35/conftest-kubernetes-action@1.0
+        uses: joaoss35/conftest-kubernetes-action@1.2
         with:
           file: example/deployment.yml
 ```
@@ -57,7 +57,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: conftest
-        uses: joaoss35/conftest-kubernetes-action@1.0
+        uses: joaoss35/conftest-kubernetes-action@1.2
         with:
           file: example/deployment.yml
           update: github.com/instrumenta/policies.git//kubernetes
@@ -77,7 +77,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: conftest
-        uses: joaoss35/conftest-kubernetes-action@1.0
+        uses: joaoss35/conftest-kubernetes-action@1.2
         with:
           file: example/deployment.yml
           policy: your_custom_policies_path_here
@@ -97,7 +97,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: conftest
-        uses: joaoss35/conftest-kubernetes-action@1.0
+        uses: joaoss35/conftest-kubernetes-action@1.2
         with:
           file: example/deployment.yml
           policy: your_custom_policies_path_here
@@ -119,7 +119,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: conftest
-        uses: joaoss35/conftest-kubernetes-action@1.0
+        uses: joaoss35/conftest-kubernetes-action@1.2
         with:
           combine: true
           file: main.tf
@@ -142,7 +142,7 @@ docker build -t foo_bar:foo_biz .
 ```shell
 git clone git@github.com:joaoss35/conftest-kubernetes-action.git
 cd conftest-kubernetes-action
-docker run -v "$PWD:/action" -e COMBINE=true -e NAMESPACE=main -e PARSER=yaml -e FILE=/action/example/deployment.yml -e TRACE=false -e OUTPUT=stdout -e UPDATE=github.com/instrumenta/policies.git//kubernetes -e POLICY=policy joaoss35/conftest-kubernetes-action:1.1
+docker run -v "$PWD:/action" -e COMBINE=true -e NAMESPACE=main -e PARSER=yaml -e FILE=/action/example/deployment.yml -e TRACE=false -e OUTPUT=stdout -e UPDATE=github.com/instrumenta/policies.git//kubernetes -e POLICY=policy joaoss35/conftest-kubernetes-action:1.2
 ```
 
 ## Actions CI
