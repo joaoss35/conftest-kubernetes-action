@@ -29,32 +29,45 @@ echo "
 #$CONFTEST_OUTPUT
 #$SUCCESS
 
-# ------ Main ------
-cd "${GITHUB_WORKSPACE}/${WORKING_DIR}"
-
-OPTIONS=("$COMBINE" "$NAMESPACE" "$OUTPUT" "$PARSER" "$FILE" "$POLICY" "$TRACE" "$UPDATE")
-
 # Check if all variables are defined
-for i in "${OPTIONS[@]}";
-do
-    if [ -z "${i}" ]; then
-        echo "Not all Conftest options are defined. Exiting..."
-        exit 1
-    fi
-done
+check(){
+  local -a -r OPTIONS=("$COMBINE" "$NAMESPACE" "$OUTPUT" "$PARSER" "$FILE" "$POLICY" "$TRACE" "$UPDATE")
+
+  for i in "${OPTIONS[@]}";
+  do
+      if [ -z "${i}" ]; then
+          echo "Not all Conftest options are defined. Exiting..."
+          exit 1
+      fi
+  done
+}
 
 # Run Conftest test command
-CONFTEST_COMMAND="/usr/local/bin/conftest test --combine=$COMBINE -n $NAMESPACE --parser=$PARSER -p $POLICY -o $OUTPUT -u $UPDATE --trace=$TRACE $FILE"
-CONFTEST_OUTPUT="$(sh -c "${CONFTEST_COMMAND}" 2>&1)"
-SUCCESS=$?
+run_conftest(){
+  local CONFTEST_COMMAND
+  local CONFTEST_OUTPUT
+  CONFTEST_COMMAND="/usr/local/bin/conftest test --combine=$COMBINE -n $NAMESPACE --parser=$PARSER -p $POLICY -o $OUTPUT -u $UPDATE --trace=$TRACE $FILE"
+  CONFTEST_OUTPUT="$(sh -c "${CONFTEST_COMMAND}" 2>&1)"
+  SUCCESS=$?
 
-# Check if Conftest run successfully
-if [ ${SUCCESS} -eq 0 ]; then
-  echo "Conftest has successfully validated your files"
-  echo "${CONFTEST_OUTPUT}"
-  exit 0
-else
-  # If not throw an error
-  echo "Conftest has failed validating your files"
-  exit 1
-fi
+  # Check if Conftest run successfully
+  if [ ${SUCCESS} -eq 0 ]; then
+    echo "Conftest has successfully validated your files"
+    echo "${CONFTEST_OUTPUT}"
+    exit 0
+  else
+    # If not throw an error
+    echo "Conftest has failed validating your files"
+    exit 1
+  fi
+}
+
+# ------ Main ------
+main() {
+cd "${GITHUB_WORKSPACE}/${WORKING_DIR}"
+
+check "$@"
+run_conftest "$@"
+}
+
+main "$@"
