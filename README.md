@@ -1,5 +1,7 @@
 # conftest-kubernetes-action
 
+[<img src="https://github.com/joaoss35/conftest-kubernetes-action/workflows/conftest/badge.svg"/>](https://github.com/joaoss35/conftest-kubernetes-action) [<img src="https://github.com/joaoss35/conftest-kubernetes-action/workflows/shellcheck/badge.svg"/>](https://github.com/joaoss35/conftest-kubernetes-action)
+
 ## About
 
 A Github action that uses [Conftest](https://www.conftest.dev/) as tool to run tests against your configuration data through [OPA](https://www.openpolicyagent.org/) policies.
@@ -145,7 +147,8 @@ docker run -v "$PWD:/action" -e COMBINE=true -e NAMESPACE=main -e PARSER=yaml -e
 
 ## Actions CI
 
-To be included.
+- Conftest Action Test
+- Shellcheck Action Test
 
 ## Special Mentions
 **@makocchi-git** for such an amazing sandbox project.

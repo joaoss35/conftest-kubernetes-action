@@ -1,5 +1,5 @@
 #!/bin/bash -Ee
-
+set -eo pipefail
 
 echo "
   _____             __ _            _     _        _____ _             _   _
