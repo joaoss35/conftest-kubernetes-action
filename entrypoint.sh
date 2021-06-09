@@ -52,14 +52,21 @@ run_conftest(){
 
   # Check if Conftest run successfully
   if [ ${SUCCESS} -eq 0 ]; then
+    #Log Conftest command
+    echo "--- File ---"
+    ls -la "${FILE}"
+    echo "------------"
+    echo "Executed: $CONFTEST_COMMAND"
     echo "Conftest has successfully validated your files"
     echo "${CONFTEST_OUTPUT}"
+    echo "Return code: ${SUCCESS}"
     exit 0
   else
     # If not throw an error
     echo "Conftest has failed validating your files"
     exit 1
   fi
+
 }
 
 # ------ Main ------
